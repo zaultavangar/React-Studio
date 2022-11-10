@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useCallback} from "react";
+import { useState, useCallback, useEffect} from "react";
 import bakeryData from "./assets/bakery-data.json";
 import BakeryItem from "./components/BakeryItem";
 import CartItem from "./components/CartItem";
@@ -21,10 +21,18 @@ function App() {
   const [cart, setCart] = useState([])
   const [cartHeight, setCartHeight] = useState(0)
 
+  const handleHeight= () => {
+    var lastElement = document.getElementById("end")
+    var rect = lastElement.lastChild.offsetTop + 175
+    console.log(rect)
+    setCartHeight(rect);
+  }
+
   const handleClick = useCallback((item) => {
     setCartCount(cartCount + 1)
     if (!cart.includes(item)) {
       cart.push(item)
+      handleHeight()
     }
     else {
       var index = cart.indexOf(item)
@@ -34,16 +42,11 @@ function App() {
       }
     }
     setCart(cart)
-    
 
   }, [cart, cartCount, setCart])
 
 
-  const handleHeight = useCallback(() => {
-    var lastElement = document.getElementById("end")
-    var rect = lastElement.lastChild.offsetTop 
-    setCartHeight(rect);
-  }, [cart, setCartHeight])
+
 
 
   return (
@@ -61,7 +64,6 @@ function App() {
           onAddToCart = {
             () => {
               handleClick(item)
-              handleHeight()
               } 
           }
         />
