@@ -2,7 +2,6 @@
 
 .App {
   margin: 10px 30px;
-  background-color: white;
   color: black;
   font-family: Garamond;
   display: grid;
@@ -11,8 +10,10 @@
   
 }
 
-.BakeryItem {
-  
+.bakery-cart {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #FBEEC1;
 }
 
 .menu {

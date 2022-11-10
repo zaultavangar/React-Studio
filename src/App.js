@@ -1,8 +1,9 @@
 import "./App.css";
-import { useState, useCallback } from "react";
+import { useState, useCallback} from "react";
 import bakeryData from "./assets/bakery-data.json";
 import BakeryItem from "./components/BakeryItem";
 import CartItem from "./components/CartItem";
+import CartTotal from "./components/CartTotal";
 
 
 /* ####### DO NOT TOUCH -- this makes the image URLs work ####### */
@@ -18,11 +19,10 @@ function App() {
 
   const [cartCount, setCartCount] = useState(0)
   const [cart, setCart] = useState([])
-
+  const [cartHeight, setCartHeight] = useState(0)
 
   const handleClick = useCallback((item) => {
     setCartCount(cartCount + 1)
-    console.log("Item: ", item)
     if (!cart.includes(item)) {
       cart.push(item)
     }
@@ -34,20 +34,23 @@ function App() {
       }
     }
     setCart(cart)
+    
 
-  }, [cart, cartCount])
-
-  console.log('cart:', cart)
+  }, [cart, cartCount, setCart])
 
 
- 
- 
+  const handleHeight = useCallback(() => {
+    var lastElement = document.getElementById("end")
+    var rect = lastElement.lastChild.offsetTop + 180
+    setCartHeight(rect);
+  }, [cart, setCartHeight])
+
 
   return (
    
     <div className="App">
       <div className="bakery-menu">
-        <h1>My Bakery</h1> {/* TODO: personalize your bakery (if you want) */}
+        <h1>MY BAKERY</h1> {/* TODO: personalize your bakery (if you want) */}
         <div className="menu">
         {bakeryData.map((item, index) => ( // TODO: map bakeryData to BakeryItem components
         <BakeryItem 
@@ -58,16 +61,16 @@ function App() {
           onAddToCart = {
             () => {
               handleClick(item)
+              handleHeight()
               } 
           }
         />
-      
         ))}
         </div>
       </div>
-      <div className="bakery-cart">
-        <h2>Cart</h2>
-        <div className="cart">
+      <div className="bakery-cart" style={{height: cartHeight}}>
+        <h2>CART</h2>
+        <div className="cart" id="end">
           {cart.map((item) => (
             <CartItem 
               name = {item.name}
@@ -75,7 +78,11 @@ function App() {
               price = {item.price}
               totalPrice = {item.totalPrice}
             />
+
           ))}
+           <CartTotal
+              cart = {cart}
+            />
       </div>     
     </div>
   </div>

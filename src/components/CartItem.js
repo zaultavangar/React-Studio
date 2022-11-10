@@ -1,13 +1,11 @@
 import "./CartItem.css";
-import { useState, useEffect } from "react";
 
 export default function CartItem (props) {
 
-  const {name, image, price, totalPrice} = props
-  const [itemCount, setItemCount] = useState(0)
+  const {name, image, price, totalPrice} = props 
 
   const setPrice = (price) => {
-    return "$" + (price)
+    return "$" + (price).toFixed(2)
   }
 
   const getQuantity = (price, totalPrice) => {

@@ -12,16 +12,19 @@ export default function BakeryItem(props) {
   }
   return ( 
         <div className="menu-item">
-        <h4>{name} </h4>
-        <p>{description}</p>
-        <p>{setPrice(price)}</p>
-        <img src={image} href="Menu Item" width="270" height="216"></img>
-        <div className="button">
-        <button className="add-to-cart"
-          onClick={onAddToCart}
-          >
-            Add to Cart</button> 
-        </div>  
+          <div className="main-info">
+            <h4>{name} — </h4><span>{setPrice(price)}</span>
+          </div>
+          <p>{description}</p>
+          <div className="image-wrapper">
+            <img src={image} href="Menu Item" width="135" height="108"></img>
+          </div>
+          <div className="button">
+            <button className="add-to-cart"
+              onClick={onAddToCart}
+              >
+              Add to Cart</button> 
+          </div>  
         </div>
   )
 } 
