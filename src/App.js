@@ -41,7 +41,7 @@ function App() {
 
   const handleHeight = useCallback(() => {
     var lastElement = document.getElementById("end")
-    var rect = lastElement.lastChild.offsetTop + 180
+    var rect = lastElement.lastChild.offsetTop + 75
     setCartHeight(rect);
   }, [cart, setCartHeight])
 
