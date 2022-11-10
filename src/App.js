@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useCallback, useEffect} from "react";
+import { useState, useCallback} from "react";
 import bakeryData from "./assets/bakery-data.json";
 import BakeryItem from "./components/BakeryItem";
 import CartItem from "./components/CartItem";
